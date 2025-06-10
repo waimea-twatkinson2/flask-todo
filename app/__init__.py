@@ -4,7 +4,9 @@
 
 from flask import Flask, render_template, request, flash, redirect
 import html
-
+import os
+from dotenv import load_dotenv
+import libsql_client
 from app.helpers.session import init_session
 from app.helpers.db import connect_db
 from app.helpers.errors import register_error_handlers, not_found_error
