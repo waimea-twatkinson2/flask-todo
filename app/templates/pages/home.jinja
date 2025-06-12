@@ -1,39 +1,24 @@
-{#=====================================================
-  Home page
-  - Hero style greeting banner
-  - List of things passed in as 'things' array
-  - Form for adding a new thing
-=====================================================#}
-
 {% extends 'pages/base.jinja' %}
-
 
 {% block title %}
 
-    Flask Demo
+    Flask and Turso DB Demo
 
 {% endblock %}
-
 
 {% block content %}
 
-    <h1>Flask Demo App with Turso DB</h1>
+    <h1>Flask and Turso Demo</h1>
 
-    <article>
-        <h2>Things List</h2>
-        <ul>
-            {% for thing in things %}
-                <li>
-                    <a href="/things/{{ thing.id }}">{{ thing.name }}</a>
-                    <span class="description">{{ thing.description }}</span>
-                </li>
-            {% else %}
-                <li>No things found.</li>
-            {% endfor %}
-        </ul>
-    </article>
+    <section id="todo-list">
 
-    <a href="/things" role="button">Go to the Things...</a>
+        {%for thing in todo%}
+            <article class="todo-item">
+            <p>Priority: <strong>{{ todo.priority }}</strong></p>
+                <h2><a href="/thing/{{ todo.id }}">{{ todo.thing_to_do }}</a></h2>
+            </article>
+        {% endfor %}
+
+    </section>
 
 {% endblock %}
-

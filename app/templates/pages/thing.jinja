@@ -22,19 +22,19 @@
     <article>
 
         <header>
-            <h3>{{ thing.name }}</h3>
+            <h3>{{ todo.thing_to_do }}</h3>
         </header>
 
-        <p>Price: <strong>${{ thing.price }}</strong></p>
+        <p>Priority: <strong>{{ todo.priority }}</strong></p>
 
         <footer>
-            <a href="/delete/{{ thing.id }}" onclick="return confirm('Really delete?');">Delete</a>
+            <a href="/delete/{{ todo.id }}" onclick="return confirm('Really delete?');">Delete</a>
         </footer>
 
     </article>
 
 
-    <a role="button" href="/things">Back to Thing List</a>
+    <a role="button" href="/todo">Back to Thing List</a>
 
 {% endblock %}
 
