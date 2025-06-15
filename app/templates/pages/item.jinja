@@ -1,0 +1,26 @@
+{% extends 'pages/base.jinja' %}
+
+{% block title %}
+
+    Flask and Turso DB Demo
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Flask and Turso Demo</h1>
+
+    <section id="todo-item">
+
+        {%for todo in todo%}
+            <article class="todo-item">
+                <h3>{{ todo.thing_to_do }}</h3>
+                <p>Priority <strong>{{ todo.priority }}</strong></p>
+                <p>Created at: {{ todo.timestamp }}</p>
+                <p>Information: {{ todo.description }}</p>
+            </article>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

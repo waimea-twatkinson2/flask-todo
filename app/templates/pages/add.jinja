@@ -16,50 +16,37 @@
 
 {% block content %}
 
-    <h1>Things...</h1>
-
-
-    <article>
-
-        <ul>
-            {% for thing in todo %}
-
-                <li>
-                    <a href="/todo/{{ todo.id }}">
-                        {{ todo.thing_to_do }}
-                    </a>
-                </li>
-
-            {% else %}
-
-                <p>None!</p>
-
-            {% endfor %}
-        </ul>
-
-    </article>
-
+    <h1>Add a new thing todo</h1>
 
     <article>
 
-        <h3>Add a New Thing...</h3>
+        <h3>Add a New Item</h3>
 
         <form action="/add" method="POST">
-
+            <label>Item
             <input
                 type="text"
-                name="name"
+                name="Item"
                 placeholder="Name of new thing"
                 required
             >
-
+            </label>
+            <label>Priority
             <input
                 type="number"
-                name="price"
-                min="0"
-                placeholder="Price in dollars"
+                name="priority"
+                min="1"
+                placeholder="How important is this thing?"
                 required
             >
+            </label>
+            <label>Description
+            <input
+                type="text"
+                name="description"
+                placeholder="What is this thing about?"
+                >
+            </label>
 
             <button>Add the Thing</button>
 

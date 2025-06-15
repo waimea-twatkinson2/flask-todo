@@ -8,14 +8,14 @@
 
 {% block content %}
 
-    <h1>Flask and Turso Demo</h1>
+    <h1>ToDo list</h1>
 
     <section id="todo-list">
 
-        {%for thing in todo%}
+        {%for todo in todo%}
             <article class="todo-item">
-            <p>Priority: <strong>{{ todo.priority }}</strong></p>
-                <h2><a href="/thing/{{ todo.id }}">{{ todo.thing_to_do }}</a></h2>
+            <p><strong>{{ todo.priority }}</strong></p>
+                <h3><a href="/item/{{ todo.id }}" type="button">{{ todo.thing_to_do }}</a></h3>
             </article>
         {% endfor %}
 

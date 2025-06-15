@@ -28,7 +28,7 @@ def index():
     with connect_db() as client:
         # Get all the things from the DB
         sql = """
-            SELECT id, thing_to_do, timestamp, priority
+            SELECT id, thing_to_do, timestamp, priority, description
             FROM todo
             ORDER BY priority DESC
         """
@@ -37,6 +37,22 @@ def index():
 
         # And show them on the page
         return render_template("pages/home.jinja", todo=todo)
+    
+    
+#-----------------------------------------------------------    
+# Item page
+#-----------------------------------------------------------
+@app.get("/item/<int:id>")
+def item(id):
+    with connect_db() as client:
+        # Get the item from the DB
+        sql = "SELECT id, thing_to_do, timestamp, priority, description FROM todo WHERE id=?"
+        values = [id]
+        result = client.execute(sql, values)
+        todo = result.rows
+
+        # And show it on the page
+        return render_template("pages/item.jinja", todo=todo)
 
 
 #-----------------------------------------------------------
@@ -51,18 +67,16 @@ def about():
 # Route for adding a task, using data posted from a form
 #-----------------------------------------------------------
 @app.post("/add")
-def add_a_thing():
+def add():
     # Get the data from the form
     thing_to_do  = request.form.get("thing_to_do")
     priority = request.form.get("priority")
-
-    # Sanitise the inputs
-    name = html.escape(name)
+    description = request.form.get("description")
 
     with connect_db() as client:
         # Add the task to the DB
-        sql = "INSERT INTO todo (thing_to_do, priority) VALUES (?, ?)"
-        values = [thing_to_do, priority]
+        sql = "INSERT INTO todo (thing_to_do, priority, description) VALUES (?, ?, ?)"
+        values = [thing_to_do, priority, description]
         client.execute(sql, values)
 
         # Go back to the home page
@@ -83,5 +97,5 @@ def delete_a_thing(id):
 
         # Go back to the home page
         flash("Thing deleted", "warning")
-        return redirect("/things")
+        return redirect("/")
 
