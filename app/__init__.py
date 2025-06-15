@@ -66,10 +66,10 @@ def about():
 #-----------------------------------------------------------
 # Route for adding a task, using data posted from a form
 #-----------------------------------------------------------
-@app.post("/add")
-def add():
+@app.post("/add-thing")
+def add_thing():
     # Get the data from the form
-    thing_to_do  = request.form.get("thing_to_do")
+    thing_to_do  = request.form.get("item")
     priority = request.form.get("priority")
     description = request.form.get("description")
 
