@@ -14,7 +14,43 @@
                 <a href="/item/{{ todo.id }}" type="button" id="buttttonnnn">Details</a>
             </article>
         {% endfor %}
+</section>
+    <section id="add-things">
 
+    <article>
+
+        <h2>Add item</h2>
+
+        <form method="post" action="/add-thing">
+            <label>Item
+            <input
+                type="text"
+                name="item"
+                placeholder="Name of new thing"
+                required
+            >
+            </label>
+            <label>Priority
+            <input
+                type="number"
+                name="priority"
+                min="1"
+                placeholder="How important is this thing?"
+                required
+            >
+            </label>
+            <label>Description
+            <input
+                type="text"
+                name="description"
+                placeholder="What is this thing about?"
+                >
+            </label>
+
+            <button>Add the Thing</button>
+
+        </form>
+
+    </article>
     </section>
-
 {% endblock %}
