@@ -32,4 +32,34 @@
 
 #messages .message.success { color: var(--pico-ins-color); }
 #messages .message.error   { color: var(--pico-del-color); }
+.todo-items h3 {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+.todo-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 15px rgb(0, 0, 0);
+    margin-bottom: 1rem;
+    border: 1px solid var(--pico-border-color);
+    transition: box-shadow 0.2s;
+}
 
+.todo-items a{
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.todo-items a:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    background: #ff00c8;
+    color: white;
+    transform: scale(1.05);
+}

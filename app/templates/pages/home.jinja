@@ -1,10 +1,5 @@
 {% extends 'pages/base.jinja' %}
 
-{% block title %}
-
-    Flask and Turso DB Demo
-
-{% endblock %}
 
 {% block content %}
 
@@ -13,9 +8,10 @@
     <section id="todo-list">
 
         {%for todo in todo%}
-            <article class="todo-item">
-            <p><strong>{{ todo.priority }}</strong></p>
-                <h3><a href="/item/{{ todo.id }}" type="button">{{ todo.thing_to_do }}</a></h3>
+            <article class="todo-items">
+            <p id="priority"><strong>{{ todo.priority }}</strong></p>
+                <h3 id="name">{{ todo.thing_to_do }}</h3>
+                <a href="/item/{{ todo.id }}" type="button" id="buttttonnnn">Details</a>
             </article>
         {% endfor %}
 
