@@ -1,56 +1,61 @@
 {% extends 'pages/base.jinja' %}
 
-
 {% block content %}
 
-    <h1>ToDo list</h1>
+<h1>ToDo list</h1>
 
-    <section id="todo-list">
-
-        {%for todo in todo%}
-            <article class="todo-items">
-            <p id="priority"><strong>{{ todo.priority }}</strong></p>
-                <h3 id="name">{{ todo.thing_to_do }}</h3>
-                <a href="/item/{{ todo.id }}" type="button" id="buttttonnnn">Details</a>
-            </article>
+<section id="todo-list">
+    <div>
+        <h2>Not Completed</h2>
+        {% set has_incomplete = false %}
+        {% for item in todo %}
+            {% if item.complete == 0 %}
+                {% set has_incomplete = true %}
+                <article class="todo-items">
+                    <p id="priority"><strong>{{ item.priority }}</strong></p>
+                    <h3 id="name">{{ item.thing_to_do }}</h3>
+                    <a href="/complete/{{ item.id }}" type="button" class="completeButton">Complete</a>
+                    <a href="/item/{{ item.id }}" type="button" class="detailButton">Details</a>
+                </article>
+            {% endif %}
         {% endfor %}
+    </div>
 </section>
-    <section id="add-things">
 
-    <article>
-
+<section id="add-things">
+    <article class="add-thing">
         <h2>Add item</h2>
-
         <form method="post" action="/add-thing">
             <label>Item
-            <input
-                type="text"
-                name="item"
-                placeholder="Name of new thing"
-                required
-            >
+                <input type="text" name="item" placeholder="Name of new thing" required>
             </label>
             <label>Priority
-            <input
-                type="number"
-                name="priority"
-                min="1"
-                placeholder="How important is this thing?"
-                required
-            >
+                <input type="number" name="priority" min="1" placeholder="How important is this thing?" required>
             </label>
             <label>Description
-            <input
-                type="text"
-                name="description"
-                placeholder="What is this thing about?"
-                >
+                <input type="text" name="description" placeholder="What is this thing about?">
             </label>
-
             <button>Add the Thing</button>
-
         </form>
-
     </article>
-    </section>
+</section>
+
+<section id="completed-list">
+    <div>
+        <h2>Completed</h2>
+        {% set has_completed = false %}
+        {% for item in todo %}
+            {% if item.complete == 1 %}
+                {% set has_completed = true %}
+                <article class="todo-items-completed">
+                    <p id="priority"><strong>{{ item.priority }}</strong></p>
+                    <h3 id="name">{{ item.thing_to_do }}</h3>
+                    <a href="/uncomplete/{{ item.id }}" type="button" class="uncompleteButton">Uncomplete</a>
+                    <a href="/item/{{ item.id }}" type="button" class="detailButton">Details</a>
+                </article>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
 {% endblock %}

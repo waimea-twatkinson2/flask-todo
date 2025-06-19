@@ -28,7 +28,7 @@ def index():
     with connect_db() as client:
         # Get all the things from the DB
         sql = """
-            SELECT id, thing_to_do, timestamp, priority, description
+            SELECT id, thing_to_do, timestamp, priority, description, complete
             FROM todo
             ORDER BY priority DESC
         """
@@ -66,22 +66,26 @@ def about():
 #-----------------------------------------------------------
 # Route for adding a task, using data posted from a form
 #-----------------------------------------------------------
-@app.post("/add-thing")
+@app.route("/add-thing", methods=["GET", "POST"])
 def add_thing():
-    # Get the data from the form
-    thing_to_do  = request.form.get("item")
-    priority = request.form.get("priority")
-    description = request.form.get("description")
+    if request.method == "POST":
+        # Get the data from the form
+        thing_to_do  = request.form.get("item")
+        priority = request.form.get("priority")
+        description = request.form.get("description")
 
-    with connect_db() as client:
-        # Add the task to the DB
-        sql = "INSERT INTO todo (thing_to_do, priority, description) VALUES (?, ?, ?)"
-        values = [thing_to_do, priority, description]
-        client.execute(sql, values)
+        with connect_db() as client:
+            # Add the task to the DB
+            sql = "INSERT INTO todo (thing_to_do, priority, description) VALUES (?, ?, ?)"
+            values = [thing_to_do, priority, description]
+            client.execute(sql, values)
 
-        # Go back to the home page
-        flash(f"Task '{thing_to_do}' added", "success")
-        return redirect("/")
+            # Go back to the home page
+            flash(f"Task '{thing_to_do}' added", "success")
+            return redirect("/")
+    else:
+        # Render the form page if accessed via GET
+        return render_template("pages/add-thing.jinja")
 
 
 #-----------------------------------------------------------
@@ -91,11 +95,28 @@ def add_thing():
 def delete_a_thing(id):
     with connect_db() as client:
         # Delete the thing from the DB
-        sql = "DELETE FROM things WHERE id=?"
+        sql = "DELETE FROM todo WHERE id=?"
         values = [id]
         client.execute(sql, values)
 
         # Go back to the home page
-        flash("Thing deleted", "warning")
+        flash("Deleted!")
         return redirect("/")
 
+@app.get("/complete/<int:id>")
+def complete_a_thing(id):
+    with connect_db() as client:
+        sql = "UPDATE todo SET complete=1 WHERE id=?"
+        values = [id]
+        client.execute(sql, values)
+        flash("Completed!")
+        return redirect("/")
+    
+@app.get("/uncomplete/<int:id>")
+def uncomplete_a_thing(id):
+    with connect_db() as client:
+        sql = "UPDATE todo SET complete=0 WHERE id=?"
+        values = [id]
+        client.execute(sql, values)
+        flash("Uncompleted!")
+        return redirect("/")

@@ -51,10 +51,28 @@
     transition: box-shadow 0.2s;
 }
 
-.todo-items a{
+.detailButton {
+    display: flex;
     color: white;
     text-decoration: none;
     box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.completeButton {
+    display: flex;
+    box-shadow: 0 2px 8px rgb(0, 0, 0);
+    margin-right: 1rem;
+}
+
+.deleteButton {
+    box-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.todo-item a:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    background: #ff00c8;
+    color: white;
+    transform: scale(1.05);
 }
 
 .todo-items a:hover {
@@ -64,3 +82,28 @@
     transform: scale(1.05);
 }
 
+.add-thing {
+    box-shadow: 0 2px 15px rgb(0, 0, 0);
+}
+
+.todo-items-completed {
+    background-image: linear-gradient(to right, var(--pico-muted-color), var(--pico-muted-color));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 15px rgb(0, 0, 0);
+    margin-bottom: 1rem;
+    border: 1px solid var(--pico-border-color);
+}
+
+.uncompleteButton {
+    display: flex;
+    box-shadow: 0 2px 8px rgb(0, 0, 0);
+    margin-right: -14rem;
+}
+
+#header {
+    background-image: linear-gradient(to right, #9f8303, #ff00c8);
+}

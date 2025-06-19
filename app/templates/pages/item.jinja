@@ -12,6 +12,7 @@
                 <p>Priority <strong>{{ todo.priority }}</strong></p>
                 <p>Created at: {{ todo.timestamp }}</p>
                 <p>Information: {{ todo.description }}</p>
+                <a type="button" href="/delete/{{ todo.id }}" class="deleteButton">Delete</a>
             </article>
         {% endfor %}
 
